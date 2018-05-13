@@ -11,14 +11,6 @@
     border: 1px solid rgb(165, 25, 25);
     box-shadow: 0px 3px 6px #ccc;
 }
-
-.turn {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-size: 22px;
-}
-
 .log ul {
     list-style: none;
     font-weight: bold;
@@ -53,32 +45,12 @@
     margin: auto;
     transition: width 250ms;
 }
-
-.controls, .log {
-    margin-top: 30px;
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ccc;
-    box-shadow: 0px 3px 6px #ccc;
-}
-
 .turn {
     margin-top: 20px;
     margin-bottom: 20px;
     font-weight: bold;
     font-size: 22px;
 }
-
-.log ul {
-    list-style: none;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.log ul li {
-    margin: 5px;
-}
-
 .log ul .player-turn {
     color: blue;
     background-color: #e4e8ff;
