@@ -1,0 +1,35 @@
+<!Doctype html>
+<html>
+<head>
+    <title> Hard Leif guddal </title>
+    <script src = "vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.for.css">
+    <link rel="stylesheet" href="css/app3.css">
+</head>
+<body>
+ <script src="app2.js"></script>
+    <div id="app2">
+        <section class="row controls" v-if="!gameIsRunning">
+                <div class="small-12 columns">
+                    <button id="start-game" @click="startGame">START NEW GAME</button>
+                </div>
+        </section>
+        <section class="row controls" v-else="!gameIsRunning">
+            <button id="caves" @click="caves">caves</button>
+            <button id="store" @click="store">store</button>
+            <button id="home"  @click="home"> home </button>
+        </section>
+        <section class="row-controls" v-if="!caves">
+            <ul>
+           <li><button id="cave of thranduil" @click="cave of thranduil">Cave1</button></li>
+           <li><button id="cave of k'lon" @click="cave of k'lon">Cave2</button></li> 
+            </ul>
+        </section>
+        <section class="row-controls" v-if="!store">
+            <ul>
+            <li><button id="sword of mayhem" @click="sword of mayhem">Sword1</button></li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
