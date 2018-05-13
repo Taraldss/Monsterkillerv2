@@ -35,6 +35,64 @@
         <li><button id="sword of mayhem">Sword1</button></li>
       </ul>
     </section>
+    <section class="row-controls" v-if="location == 'trainingGround'">
+            <section class="row">
+                    <div class="small-6 columns">
+                        <h1 class="text-center">{{ playerName }}</h1>
+                        <div class="healthbar">
+                            <div
+                                    class="healthbar text-center"
+                                    style="background-color: green; margin: 0; color: white;"
+                                    :style="{width: (playerHealth/ playerHealthMax) * 100 + '%'}">
+                                {{ playerHealth }}
+                            </div>
+                        </div>
+                        <div class="manabar">
+                            <div
+                                    class="manabar text-center"
+                                    style="background-color: blue; margin: 0; color: white;"
+                                    :style="{width: (playerMana / playerManaMax) * 100 + '%'}">
+                                {{ playerMana }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-6 columns">
+                        <h1 class="text-center">{{ currentMonster }}</h1>
+                        <div class="healthbar">
+                            <div
+                                    class="healthbar text-center"
+                                    style="background-color: green; margin: 0; color: white;"
+                                    :style="{width: (monsterHealth / monsterHealthMax) *100 + '%'}">
+                                {{ monsterHealth }}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="row controls" v-if="!gameIsRunning">
+                    <div class="small-12 columns">
+                        <button id="start-game" @click="startGame">START NEW GAME</button>
+                    </div>
+                </section>
+                <section class="row controls" v-else>
+                    <div class="small-12 columns">
+                        <button id="attack" @click="attack">ATTACK</button>
+                        <button id="spell" @click="spell">SPELL</button>
+                        <button id="special-attack" @click="specialAttack">SPECIAL ATTACK <span v-if="specialAcd !=0">({{ specialAcd }})</span></button>
+                        <button id="heal" @click="heal">HEAL <span v-if="healCooldown !=0">({{ healCooldown }})</span></button>
+                        <button id="give-up" @click="giveUp">GIVE UP</button>
+                    </div>
+                </section>
+                <section class="row log" v-if="turns.length > 0">
+                    <div class="small-12 columns">
+                        <ul>
+                            <li v-for="turn in turns"
+                                :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+                                {{ turn.text }}
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+    </section>
   </div>
  <script src="app2.js"></script>
 </body>
