@@ -2,23 +2,23 @@ new Vue({
     el: '#app',
     data: {
         gameIsRunning: false,
-        caves:         false,
-        store:         false,
-        home:          false,
-        caveOfThranduil: false,
-        caveOfKlon: false,
-        swordOfMayhem: false,
+        location: 'home',
+        item: 'swag',
+        
+
 
         
     },
     methods: {
-        startgame: function (){
+        startGame: function (){
             this.gameIsRunning = true;
 
         },
-    caves: function (){
-        this.caves = true;
-        
-    }
+    travel: function (place){
+        this.location = place;
+    },
+    gear: function (item){
+        this.item = true;
+    },
     }
 });
