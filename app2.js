@@ -31,6 +31,7 @@ new Vue({
     },
     train: function (trainingGround){
         this.train = true;
+        // Sånn skriver du kommentarer i javascriptfiler. 
     },
     startGame: function () {
         this.gameIsRunning = true;

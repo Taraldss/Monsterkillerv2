@@ -35,7 +35,11 @@
         <li><button id="sword of mayhem">Sword1</button></li>
       </ul>
     </section>
-    <section class="row-controls" v-if="location == 'trainingGround'">
+    <!-- 
+        Fjernet training i v-if'en, siden du har linket til kun training i knappen over 
+        Dette er en HTML-kommentar forresten, så den blir ikke synlig i siden.
+    -->
+    <section class="row-controls" v-if="location == 'trainin'">
            <section class="row">
         <div class="small-6 columns">
             <h1 class="text-center">{{ playerName }}</h1>
