@@ -1,98 +1,103 @@
 <!Doctype html>
 <html>
+
 <head>
-    <title> Hard Leif guddal </title>
-    <script src = "vue.js"></script>
-    <link rel="stylesheet" href="css/foundation.for.css">
-    <link rel="stylesheet" href="css/app3.css">
+  <title> Hard Leif guddal </title>
+  <script src="vue.js"></script>
+  <link rel="stylesheet" href="css/foundation.for.css">
+  <link rel="stylesheet" href="css/app3.css">
 </head>
+
 <body>
   <div id="app">
     <section class="row-controls" v-if="!gameIsRunning">
       <div class="small-12 columns">
-          <button id="startGame" @click="startGame">START NEW GAME</button>
+        <button id="startGame" @click="startGame">START NEW GAME</button>
       </div>
     </section>
     <section class="row-controls" v-else="!gameIsRunning">
-        <div class="small-12 columns">
-      <button id="caves" @click="travel('caves')">caves</button>
-      <button id="store" @click="travel('store')">store</button>
-      <button id="home"  @click="travel('home')">home </button>
-      <button id="training" @click="travel('training')">TrainingGround</button>
+      <div class="small-12 columns">
+        <button id="caves" @click="travel('caves')">caves</button>
+        <button id="store" @click="travel('store')">store</button>
+        <button id="home" @click="travel('home')">home </button>
+        <button id="training" @click="travel('training')">TrainingGround</button>
       </div>
     </section>
-    <section  v-if="location == 'home'">
+    <section v-if="location == 'home'">
       @home dude
     </section>
-    <section class="row-controls"  v-if="location == 'caves'">
+    <section v-if="location == 'store'">
+      <h1>Stuff for sale</h1>
       <ul>
-        <li><button id="cave of thranduil">Cave1</button></li>
-        <li><button id="cave of k'lon" >Cave2</button></li> 
+        <li v-for="{item, index} in shop">{{ item.name }}
+          <button @click="buy(index)">Buy</button>
+        </li>
       </ul>
     </section>
-    <section class="row-controls" v-if="location == 'store'">
+    <section class="row-controls" v-if="location == 'caves'">
       <ul>
-        <li><button id="sword of mayhem">Sword1</button></li>
+        <li>
+          <button>Cave1</button>
+        </li>
+        <li>
+          <button>Cave2</button>
+        </li>
       </ul>
     </section>
     <!-- 
         Fjernet training i v-if'en, siden du har linket til kun training i knappen over 
-        Dette er en HTML-kommentar forresten, så den blir ikke synlig i siden.
+        Dette er en HTML-kommentar forresten, så den blir ikke synlig i siden. Det stod trainingGame der
     -->
-    <section class="row-controls" v-if="location == 'trainin'">
-           <section class="row">
+    <section class="row-controls" v-if="location == 'training'">
+      <section class="row">
         <div class="small-6 columns">
-            <h1 class="text-center">{{ playerName }}</h1>
-            <div class="healthbar">
-                <div
-                        class="healthbar text-center"
-                        style="background-color: green; margin: 0; color: white;"
-                        :style="{width: (playerHealth/ playerHealthMax) * 100 + '%'}">
-                    {{ playerHealth }}
-                </div>
+          <h1 class="text-center">{{ playerName }}</h1>
+          <div class="healthbar">
+            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: (playerHealth/ playerHealthMax) * 100 + '%'}">
+              {{ playerHealth }}
             </div>
-            <div class="manabar">
-                <div
-                        class="manabar text-center"
-                        style="background-color: blue; margin: 0; color: white;"
-                        :style="{width: (playerMana / playerManaMax) * 100 + '%'}">
-                    {{ playerMana }}
-                </div>
+          </div>
+          <div class="manabar">
+            <div class="manabar text-center" style="background-color: blue; margin: 0; color: white;" :style="{width: (playerMana / playerManaMax) * 100 + '%'}">
+              {{ playerMana }}
             </div>
+          </div>
         </div>
         <div class="small-6 columns">
-            <h1 class="text-center">{{ currentMonster }}</h1>
-            <div class="healthbar">
-                <div
-                        class="healthbar text-center"
-                        style="background-color: green; margin: 0; color: white;"
-                        :style="{width: (monsterHealth / monsterHealthMax) *100 + '%'}">
-                    {{ monsterHealth }}
-                </div>
+          <h1 class="text-center">Trainingdummy</h1>
+          <!-- Nå er den bare statisk trainingdummy, du trenger ikke ha noen variabler -->
+          <div class="healthbar">
+            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: (monsterHealth / monsterHealthMax) *100 + '%'}">
+              {{ monsterHealth }}
             </div>
+          </div>
         </div>
-    </section>
-    <section class="row controls" v-else>
+      </section>
+      <section class="row controls">
         <div class="small-12 columns">
-            <button id="attack" @click="attack">ATTACK</button>
-            <button id="spell" @click="spell">SPELL</button>
-            <button id="special-attack" @click="specialAttack">SPECIAL ATTACK <span v-if="specialAcd !=0">({{ specialAcd }})</span></button>
-            <button id="heal" @click="heal">HEAL <span v-if="healCooldown !=0">({{ healCooldown }})</span></button>
-            <button id="give-up" @click="giveUp">GIVE UP</button>
-        </div>
-    </section>
-    <section class="row log" v-if="turns.length > 0">
+          <button id="attack" @click="attack">ATTACK</button>
+          <button id="spell" @click="spell">SPELL</button>
+          <button id="special-attack" @click="specialAttack">SPECIAL ATTACK
+            <span v-if="specialAcd !=0">({{ specialAcd }})</span>
+          </button>
+          <button id="heal" @click="heal">HEAL
+            <span v-if="healCooldown !=0">({{ healCooldown }})</span>
+          </button>
+          <button id="give-up" @click="giveUp">GIVE UP</button>
+        </div>true
+      </section>
+      <section class="row log" v-if="turns.length > 0">
         <div class="small-12 columns">
-            <ul>
-                <li v-for="turn in turns"
-                    :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
-                    {{ turn.text }}
-                </li>
-            </ul>
+          <ul>
+            <li v-for="turn in turns" :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+              {{ turn.text }}
+            </li>
+          </ul>
         </div>
-    </section>
+      </section>
     </section>
   </div>
- <script src="app2.js"></script>
+  <script src="app2.js"></script>
 </body>
+
 </html>
