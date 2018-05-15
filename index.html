@@ -29,8 +29,16 @@
     <section v-if="location == 'store'">
       <h1>Stuff for sale</h1>
       <ul>
-        <li v-for="{item, index} in shop">{{ item.name }}
-          <button @click="buy(index)">Buy</button>
+        <li v-for="(item, index) in shop">{{ item.name }} {{ item.cost }} gold
+          <button @click="buy(index)" v-if="item.owns === false">Buy</button>
+        </li>
+      </ul>
+      <h1>Stuff you own</h1>
+      <p>Cash: {{ playerCash }}</p>
+      <p>PlayerArmor: {{ playerArmor }} </p>
+      <ul>
+        <li v-for="item in playerItems">
+          {{ item.name }}
         </li>
       </ul>
     </section>

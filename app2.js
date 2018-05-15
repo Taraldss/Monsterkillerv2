@@ -3,7 +3,7 @@ new Vue({
   data: {
     gameIsRunning: false,
     location: '',
-    item: [],
+    playerItems: [],
     shop: [{
         name: 'Swag',
         cost: 10,
@@ -19,10 +19,12 @@ new Vue({
         owns: false,
       },
     ],
+    playerArmor: 0,
     playerHealth: 0,
     playerHealthMax: 120,
     playerManaMax: 50,
     playerMana: 50,
+    playerCash: 10,
     monsterHealth: 100,
     monsterHealthMax: 1000,
     gameIsRunning: false,
@@ -39,8 +41,15 @@ new Vue({
     travel: function (place) {
       this.location = place;
     },
-    buy: function (item) {
-      this.item.push(this.shop[item]);
+    buy: function (index) {
+      if (this.playerCash >= this.shop[index].cost) {
+        this.playerItems.push(this.shop[index]);
+        this.shop[index].owns = true;
+        this.playerCash -= this.shop[index].cost;
+        this.playerArmor += this.shop[index].armorValue;
+      } else {
+        alert('Cant afford this');
+      }
     },
     startGame: function () {
       this.gameIsRunning = true;
