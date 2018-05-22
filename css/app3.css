@@ -2,23 +2,28 @@
     width: 800px;
     margin: 0 auto;
     padding-top: 4 em;
-    padding-left:2 em;
-  }
-.controls, .log {
+    padding-left: 2 em;
+}
+
+.controls,
+.log {
     margin-top: 20px;
     text-align: center;
     padding: 10px;
     border: 1px solid rgb(165, 25, 25);
     box-shadow: 0px 3px 6px #ccc;
 }
+
 .log ul {
     list-style: none;
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .log ul li {
     margin: 5px;
 }
+
 .button {
     font-size: 15px;
     background-color: #eee;
@@ -26,8 +31,17 @@
     box-shadow: 0 1px 1px black;
     margin: 10px;
 }
+
 .text-center {
     text-align: center;
+}
+
+.armorbar {
+    width: 60%;
+    height: 40px;
+    background-color: #c7c7c7;
+    margin: auto;
+    transition: width 250ms;
 }
 
 .healthbar {
@@ -45,12 +59,14 @@
     margin: auto;
     transition: width 250ms;
 }
+
 .turn {
     margin-top: 20px;
     margin-bottom: 20px;
     font-weight: bold;
     font-size: 22px;
 }
+
 .log ul .player-turn {
     color: blue;
     background-color: #e4e8ff;
@@ -100,9 +116,11 @@
 #give-up:hover {
     background-color: #c7c7c7;
 }
+
 #spell {
     background-color: blue;
 }
+
 #spell:hover {
     background-color: lightblue;
 }

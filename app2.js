@@ -5,7 +5,7 @@ new Vue({
     location: '',
     playerItems: [],
     shop: [{
-        name: 'Swag',
+        name: 'shoulders',
         cost: 10,
         type: 'armor',
         armorValue: 10,

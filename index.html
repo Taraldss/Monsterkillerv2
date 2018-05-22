@@ -60,6 +60,11 @@
       <section class="row">
         <div class="small-6 columns">
           <h1 class="text-center">{{ playerName }}</h1>
+          <div class="armorbar">
+            <div class="healthbar text-center" style="background-color: grey; margin: 0; color: black;">
+              {{ playerArmor }}
+            </div>
+          </div>
           <div class="healthbar">
             <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: (playerHealth/ playerHealthMax) * 100 + '%'}">
               {{ playerHealth }}
