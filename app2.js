@@ -135,8 +135,12 @@ new Vue({
     },
     monsterAttacks: function () {
       var damage = this.calculateDamage(6, 10);
-      this.playerHealth -= damage;
       this.checkWin();
+      if (this.playerArmor <= 0) {
+        this.playerHealth -= damage;
+      } else {
+        this.playerArmor -= damage;
+      }
       this.turns.unshift({
         isPlayer: false,
         text: 'Monster hits Player for ' + damage
