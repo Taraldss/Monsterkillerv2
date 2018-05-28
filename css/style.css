@@ -67,6 +67,10 @@
     font-size: 22px;
 }
 
+.gc {
+    color: black;
+}
+
 .log ul .player-turn {
     color: blue;
     background-color: #e4e8ff;

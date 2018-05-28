@@ -59,32 +59,32 @@ new Vue({
             this.monsterHealthMax = 1000;
             this.turns = [];
         },
-        map: function () {
-            canv = document.getElementById("gc");
-            ctx = canv.getContext("2d");
-            document.addEventListener("keydown", keyPush);
-            setInterval(game, 1000 / 15);
-        },
-        keypush: function () {
-            switch (evt.keyCode) {
-                case 37:
-                    xv = -1;
-                    yv = 0;
-                    break;
-                case 38:
-                    xv = 0;
-                    yv = -1;
-                    break;
-                case 39:
-                    xv = 1;
-                    yv = 0;
-                    break;
-                case 40:
-                    xv = 0;
-                    yv = 1;
-                    break;
-            }
-        },
+        /* map: function () {
+             canv = document.getElementById("gc");
+             ctx = canv.getContext("2d");
+             document.addEventListener("keydown", keyPush);
+             setInterval(game, 1000 / 15);
+         },
+         keypush: function () {
+             switch (evt.keyCode) {
+                 case 37:
+                     xv = -1;
+                     yv = 0;
+                     break;
+                 case 38:
+                     xv = 0;
+                     yv = -1;
+                     break;
+                 case 39:
+                     xv = 1;
+                     yv = 0;
+                     break;
+                 case 40:
+                     xv = 0;
+                     yv = 1;
+                     break;
+             }
+         },*/
         attack: function () {
             this.cooldown();
             var damage = this.calculateDamage(25, 50);
@@ -190,6 +190,21 @@ new Vue({
                 this.specialAcd--;
             }
         },
+
+        /* training: function () {
+             if (this.monsterHealth >= 0) {
+                 this.playerHealth = playerHealthMax;
+                 this.playerMana = playerManaMax;
+                 this.MonsterHealt = monsterHealthMax;
+                 this.cooldown = 0;
+             }
+             if (this.playerHealth >= 0) {
+                 this.playerHealth = playerHealthMax;
+                 this.playerMana = playerManaMax;
+                 this.MonsterHealt = monsterHealthMax;
+                 this.cooldown = 0;
+             }
+         },*/
         checkWin: function () {
             if (this.monsterHealth <= 0) {
                 if (confirm('You won! New Game?')) {
