@@ -1,25 +1,56 @@
 new Vue({
     el: '#app',
     data: {
+        gameIsRunning: false,
+        location: '',
+        playerItems: [],
+        shop: [{
+                name: 'shoulders',
+                cost: 10,
+                type: 'armor',
+                armorValue: 10,
+                owns: false,
+            },
+            {
+                name: 'Bandana',
+                cost: 10,
+                type: 'armor',
+                armorValue: 10,
+                owns: false,
+            },
+        ],
+        playerArmor: 0,
         playerHealth: 0,
         playerHealthMax: 120,
         playerManaMax: 50,
         playerMana: 50,
+        playerCash: 10,
         monsterHealth: 100,
-        monsterHealthMax:1000,
+        monsterHealthMax: 1000,
         gameIsRunning: false,
         healCooldown: 0,
         specialAcd: 0,
         playerName: 'Leif Arne',
-        monsterName: ['gunhilda boge','Kent even','Huseklepp'],
         turns: []
     },
-    computed: {
-        currentMonster: function() {
-            return this.monsterName[Math.floor(Math.random()*this.monsterName.length)];
-        },
-    },
     methods: {
+        startGame: function () {
+            this.gameIsRunning = true;
+
+        },
+        travel: function (place) {
+            this.location = place;
+        },
+        buy: function (index) {
+            if (this.playerCash >= this.shop[index].cost) {
+                this.playerItems.push(this.shop[index]);
+                this.shop[index].owns = true;
+                this.playerCash -= this.shop[index].cost;
+                this.playerArmor += this.shop[index].armorValue;
+            } else {
+                alert('Cant afford this');
+            }
+        },
         startGame: function () {
             this.gameIsRunning = true;
             this.playerHealth = this.playerHealthMax;
@@ -32,8 +63,8 @@ new Vue({
             this.cooldown();
             var damage = this.calculateDamage(25, 50);
             this.monsterHealth -= damage;
-            if(this.playerMana <=40){
-                this.playerMana +=10;
+            if (this.playerMana <= 40) {
+                this.playerMana += 10;
             }
             this.turns.unshift({
                 isPlayer: true,
@@ -51,35 +82,35 @@ new Vue({
             this.monsterHealth -= damage;
             this.playerMana -= 25;
             this.turns.unshift({
-                isPlayer:true,
-                text: 'Leif arne uses flame punch' + damage
-            });
-            if(this.checkWin()) {
-                return;
-            }
-            if(this.playerMana <=0){
-                this.spell = false;
-            }
-            if(this.playermana >=0){
-                this.spell = true;
-            }
-            this.monsterAttacks();
-        },
-        specialAttack: function() {
-           
-            if (this.specialAcd === 0){
-                this.cooldown();
-                var damage = this.calculateDamage(30, 100);
-            this.monsterHealth -= damage;
-            this.turns.unshift({
                 isPlayer: true,
-                text: 'Leif Arne crits Monster for ' + damage
+                text: 'Leif arne uses flame punch' + damage
             });
             if (this.checkWin()) {
                 return;
             }
+            if (this.playerMana <= 0) {
+                this.spell = false;
+            }
+            if (this.playermana >= 0) {
+                this.spell = true;
+            }
             this.monsterAttacks();
-            this.specialAcd = 3;
+        },
+        specialAttack: function () {
+
+            if (this.specialAcd === 0) {
+                this.cooldown();
+                var damage = this.calculateDamage(30, 100);
+                this.monsterHealth -= damage;
+                this.turns.unshift({
+                    isPlayer: true,
+                    text: 'Leif Arne crits Monster for ' + damage
+                });
+                if (this.checkWin()) {
+                    return;
+                }
+                this.monsterAttacks();
+                this.specialAcd = 3;
             }
         },
         heal: function () {
@@ -97,32 +128,43 @@ new Vue({
                 this.healCooldown = 3;
                 this.monsterAttacks();
             }
-            
+
         },
         giveUp: function () {
             this.gameIsRunning = false;
         },
-        monsterAttacks: function() {
+        monsterAttacks: function () {
             var damage = this.calculateDamage(6, 10);
-            this.playerHealth -= damage;
             this.checkWin();
+            this.playerDamage(damage);
             this.turns.unshift({
                 isPlayer: false,
                 text: 'Monster hits Player for ' + damage
             });
         },
-        calculateDamage: function(min, max) {
+        playerDamage: function (damage) {
+            var remainingDamage = damage;
+            if (remainingDamage >= this.playerArmor) {
+                remainingDamage -= this.playerArmor;
+                this.playerArmor = 0;
+            } else {
+                this.playerArmor -= remainingDamage;
+                remainingDamage = 0;
+            }
+            this.playerHealth -= remainingDamage;
+        },
+        calculateDamage: function (min, max) {
             return Math.max(Math.floor(Math.random() * max) + 1, min);
         },
-        cooldown: function() {
-            if(this.healCooldown != 0){
+        cooldown: function () {
+            if (this.healCooldown != 0) {
                 this.healCooldown--;
             }
-            if(this.specialAcd != 0){
+            if (this.specialAcd != 0) {
                 this.specialAcd--;
             }
         },
-        checkWin: function() {
+        checkWin: function () {
             if (this.monsterHealth <= 0) {
                 if (confirm('You won! New Game?')) {
                     this.startGame();

@@ -38,7 +38,7 @@
 
 .armorbar {
     width: 60%;
-    height: 40px;
+    height: 20px;
     background-color: #c7c7c7;
     margin: auto;
     transition: width 250ms;
