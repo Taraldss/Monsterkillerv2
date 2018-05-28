@@ -59,6 +59,32 @@ new Vue({
             this.monsterHealthMax = 1000;
             this.turns = [];
         },
+        map: function () {
+            canv = document.getElementById("gc");
+            ctx = canv.getContext("2d");
+            document.addEventListener("keydown", keyPush);
+            setInterval(game, 1000 / 15);
+        },
+        keypush: function () {
+            switch (evt.keyCode) {
+                case 37:
+                    xv = -1;
+                    yv = 0;
+                    break;
+                case 38:
+                    xv = 0;
+                    yv = -1;
+                    break;
+                case 39:
+                    xv = 1;
+                    yv = 0;
+                    break;
+                case 40:
+                    xv = 0;
+                    yv = 1;
+                    break;
+            }
+        },
         attack: function () {
             this.cooldown();
             var damage = this.calculateDamage(25, 50);
