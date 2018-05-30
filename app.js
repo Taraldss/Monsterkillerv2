@@ -60,7 +60,7 @@ new Vue({
             this.turns = [];
         },
         /* map: function () {
-             canv = document.getElementById("gc");
+             canv = document         <button id="reset" v-if="></button>.getElementById("gc");
              ctx = canv.getContext("2d");
              document.addEventListener("keydown", keyPush);
              setInterval(game, 1000 / 15);
@@ -114,10 +114,10 @@ new Vue({
             if (this.checkWin()) {
                 return;
             }
-            if (this.playerMana <= 0) {
+            if (this.playerMana <= 25) {
                 this.spell = false;
-            }
-            if (this.playermana >= 0) {
+
+            } else {
                 this.spell = true;
             }
             this.monsterAttacks();
@@ -153,9 +153,10 @@ new Vue({
                 });
                 this.healCooldown = 3;
                 this.monsterAttacks();
-            }
 
+            }
         },
+
         giveUp: function () {
             this.gameIsRunning = false;
         },
@@ -190,21 +191,6 @@ new Vue({
                 this.specialAcd--;
             }
         },
-
-        /* training: function () {
-             if (this.monsterHealth >= 0) {
-                 this.playerHealth = playerHealthMax;
-                 this.playerMana = playerManaMax;
-                 this.MonsterHealt = monsterHealthMax;
-                 this.cooldown = 0;
-             }
-             if (this.playerHealth >= 0) {
-                 this.playerHealth = playerHealthMax;
-                 this.playerMana = playerManaMax;
-                 this.MonsterHealt = monsterHealthMax;
-                 this.cooldown = 0;
-             }
-         },*/
         checkWin: function () {
             if (this.monsterHealth <= 0) {
                 if (confirm('You won! New Game?')) {
